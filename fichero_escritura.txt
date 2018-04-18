@@ -1,0 +1,11 @@
+---------------------------
+Listado de alumnos 
+---------------------------
+-------Alumno nº1------------
+Nombre: Pepe
+Apellido: Garcia
+Edad: 28
+-------Alumno nº2------------
+Nombre: Juan
+Apellido: Sanchez
+Edad: 18

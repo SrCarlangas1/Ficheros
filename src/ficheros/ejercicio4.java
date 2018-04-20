@@ -1,14 +1,16 @@
 package ficheros;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
 public class ejercicio4 {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException {
                 
 		// Fichero del que queremos leer
 		File fichero = new File("notas.txt");
@@ -16,9 +18,8 @@ public class ejercicio4 {
 		try {
                     s = new Scanner(fichero);
                     FileWriter fichero2;
-                    
                     String sl = System.lineSeparator();
-                    fichero2 = new FileWriter("ejercicio5.txt");
+                    fichero2 = new FileWriter("ejercicio4.txt");
                     Personas alumno = new Personas();
                     while (s.hasNextLine()) {
                         String linea = s.nextLine();
@@ -50,14 +51,25 @@ public class ejercicio4 {
                         String nota6 = contenido[8];
                         alumno.setNotaFOL(nota6);
                          
-                        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("ejercicio5.txt"));
+                        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("ejercicio4.txt"));
                         out.writeObject(alumno);
                         
+                        ObjectInputStream in = new ObjectInputStream(new FileInputStream("ejercicio4.txt"));
+                        alumno = (Personas)in.readObject();
                         
                         
-                        
-                        
-                        alumno.mostrarnotas();
+                        while (alumno !=null) {
+                            System.out.println("Nombre: " +alumno.getNombre());
+                            System.out.println("Apellido1: " +alumno.getApellido1());
+                            System.out.println("Apellido2: " +alumno.getApellido2());
+                            System.out.println("Lenguaje de marcas: " +alumno.getNota1());
+                            System.out.println("Programación: " +alumno.getNota2());
+                            System.out.println("Entornos de desarrollo: " +alumno.getNota3());
+                            System.out.println("Base de datos: " +alumno.getNota4());
+                            System.out.println("Sistemas Informáticos: " +alumno.getNota5());
+                            System.out.println("FOL: " +alumno.getNotaFOL());
+                            alumno = (Personas)in.readObject();
+                        }
                     }
                     fichero2.close();
 		} catch (IOException ex) {
@@ -73,4 +85,5 @@ public class ejercicio4 {
 		}
                 
 	}
+        
 }
